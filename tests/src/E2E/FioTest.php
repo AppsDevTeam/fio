@@ -16,6 +16,9 @@ if (!is_file($ini)) {
 	Tester\Environment::skip('Missing config file.');
 }
 
+/**
+ * @var false|array<array{token: string, account: string}> $accounts
+ */
 $accounts = parse_ini_file($ini, true);
 
 if ($accounts === false) {

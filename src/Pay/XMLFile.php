@@ -57,7 +57,7 @@ class XMLFile
 		$elements = $data->getExpectedProperty();
 		$this->xml->startElement($data->getStartXmlElement());
 		foreach ($data as $node => $value) {
-			if ($value == false) { // intentionally ==
+			if ($value === false || $value === null || $value === '' || $value === 0 || $value === 0.0) {
 				if ($elements[$node] === false) {
 					continue;
 				}

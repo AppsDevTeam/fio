@@ -65,6 +65,7 @@ class Bank
 
 	public static function createInternational(string $account): self
 	{
+		/** @var ?array{account: string, code?: string} $find */
 		$find = Strings::match($account, '~^(?P<account>[a-z0-9]{1,34})(?P<code>/[a-z0-9]{11})?$~i');
 		if ($find === null) {
 			throw new InvalidArgument('Account must have format account[/code].');
@@ -81,6 +82,7 @@ class Bank
 
 	public static function createNational(string $account): self
 	{
+		/** @var ?array{account: string, code?: string, prefix?: string} $find */
 		$find = Strings::match($account, '~^(?P<prefix>\d+-)?(?P<account>\d+)(?P<code>/\d+)?$~');
 		if ($find === null) {
 			throw new InvalidArgument('Account must have format [prefix-]account[/code].');

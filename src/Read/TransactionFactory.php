@@ -4,11 +4,11 @@ namespace h4kuna\Fio\Read;
 
 use h4kuna\Fio\Exceptions\InvalidArgument;
 use h4kuna\Fio\Utils\Fio;
-use h4kuna\Memoize\MemoryStorage;
+use h4kuna\Memoize\Memoize;
 
 class TransactionFactory
 {
-	use MemoryStorage;
+	use Memoize;
 
 	public function create(\stdClass $source): object
 	{

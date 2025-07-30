@@ -38,7 +38,7 @@ use Psr\Http\Message\ResponseInterface;
 		} catch (Utils\JsonException $e) {
 			throw new Exceptions\ServiceUnavailable(sprintf('%s: %s', $e->getMessage(), $content), 0, $e);
 		}
-		assert($json instanceof \stdClass);
+		assert($json instanceof \stdClass && $json->accountStatement instanceof \stdClass);
 
 		return new TransactionList($json->accountStatement, $this->transactionFactory);
 	}
