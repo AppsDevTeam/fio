@@ -24,11 +24,11 @@ class FioFactory
 	/**
 	 * @param array<array{token: string, account: string}> $accounts
 	 */
-	public function __construct(array $accounts, string $transactionClass = Transaction::class, string $temp = '')
+	public function __construct(array $accounts, string $transactionClass = Transaction::class, string $temp = '', $clientConfig = [])
 	{
 		$this->setTemp($temp);
 		$this->accountCollection = $this->createAccountCollection($accounts);
-		$this->queue = $this->createQueue();
+		$this->queue = $this->createQueue($clientConfig);
 		$this->transactionClass = $transactionClass;
 	}
 
@@ -65,9 +65,9 @@ class FioFactory
 	 * COMMON ******************************************************************
 	 * *************************************************************************
 	 */
-	protected function createQueue(): Fio\Request\IQueue
+	protected function createQueue(array $clientConfig = []): Fio\Request\IQueue
 	{
-		return new Fio\Request\Queue($this->temp);
+		return new Fio\Request\Queue($this->temp, $clientConfig);
 	}
 
 

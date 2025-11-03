@@ -25,10 +25,13 @@ class Queue implements IQueue
 	/** @var string */
 	private $tempDir;
 
+	/** @var array */
+	private $clientConfig;
 
-	public function __construct(string $tempDir)
+	public function __construct(string $tempDir, array $clientConfig = [])
 	{
 		$this->tempDir = $tempDir;
+		$this->clientConfig = $clientConfig;
 	}
 
 
@@ -190,7 +193,7 @@ class Queue implements IQueue
 
 	protected function createClient(): GuzzleHttp\ClientInterface
 	{
-		return new GuzzleHttp\Client(['headers' => ['X-Powered-By' => 'h4kuna/fio']]);
+		return new GuzzleHttp\Client(array_merge_recursive(['headers' => ['X-Powered-By' => 'h4kuna/fio']], $this->clientConfig));
 	}
 
 }
